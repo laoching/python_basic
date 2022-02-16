@@ -7,10 +7,14 @@ def calc(user_oper, user_number):
     hap = user_number[0]
     for i in user_oper:
         if i == '*':
+            # * 연산자를 만나면 연산자 기준 앞, 뒤의 숫자들을 곱해서 gop 변수에 넣음
             gop = user_number[user_oper.index(i)] * user_number[user_oper.index(i)+1]
+            # 연산에 사용된 숫자들은 리스트에서 제거
             user_number.pop(user_oper.index(i))
             user_number.pop(user_oper.index(i))
+            # 연산 결과를 숫자 리스트에 삽입
             user_number.append(gop)
+            # 연산에 사용된 연산자 제거
             user_oper.pop(user_oper.index(i))
             if len(user_number) == 1:
                 return user_number[0]
