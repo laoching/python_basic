@@ -12,16 +12,20 @@ def calc(user_oper, user_number):
             user_number.pop(user_oper.index(i))
             user_number.append(gop)
             user_oper.pop(user_oper.index(i))
+            if len(user_number) == 1:
+                return user_number[0]
         elif i == '/':
             na = user_number[user_oper.index(i)] // user_number[user_oper.index(i)+1]
             user_number.pop(user_oper.index(i))
             user_number.pop(user_oper.index(i))
-            user_number.append(na)
+            user_number.insert(0,na)
             user_oper.remove(i)
+            if len(user_number) == 1:
+                return user_number[0]
     if user_oper[0] == '*':
         gop = user_number[user_oper.index(i)] * user_number[user_oper.index(i) + 1]
         return gop
-    if user_oper[0] == '/':
+    elif user_oper[0] == '/':
         na = user_number[user_oper.index(i)] // user_number[user_oper.index(i) + 1]
         return na
     for i in range(len(user_oper)):
