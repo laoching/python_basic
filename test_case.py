@@ -58,7 +58,7 @@ def main():
     user_number.append(formula)
     # user_number 리스트를 int형으로 변환
     user_number = list(map(int, user_number))
-    #print(f'result: {calc(user_oper, user_number)}')
+    print(f'result: {calc(user_oper, user_number)}')
 
 class customtest(TestCase):
     def test_sum_units_digit(self):
@@ -67,8 +67,6 @@ class customtest(TestCase):
         self.assertEqual(calc(['+', '-', '+'], [1, 2, 3, 4]), 4)
     def test_mul_tenth_digit(self):
         self.assertEqual(calc(['+', '*'],[12, 2, 3]), 18)
-"""
+
 if __name__ == '__main__':
-    customtest()
-    #main()
-"""
+    main()
