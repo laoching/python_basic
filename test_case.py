@@ -6,40 +6,41 @@ from unittest import *
 
 # 연산을 수행하고 결과를 출력하는 calc 함수
 def calc(user_oper, user_number):
-    hap = user_number[0]
+    initial_value = user_number[0]
     for i in user_oper:
+        operator = user_oper.index(i)
         if i == '*':
-            # * 연산자를 만나면 연산자 기준 앞, 뒤의 숫자들을 곱해서 gop 변수에 넣음
-            gop = user_number[user_oper.index(i)] * user_number[user_oper.index(i)+1]
+            # * 연산자를 만나면 연산자 기준 앞, 뒤의 숫자들을 곱해서 multiple 변수에 넣음
+            multiple = user_number[operator] * user_number[operator+1]
             # 연산에 사용된 숫자들은 리스트에서 제거
-            user_number.pop(user_oper.index(i))
-            user_number.pop(user_oper.index(i))
+            user_number.pop(operator)
+            user_number.pop(operator)
             # 연산 결과를 숫자 리스트에 삽입
-            user_number.append(gop)
+            user_number.append(multiple)
             # 연산에 사용된 연산자 제거
-            user_oper.pop(user_oper.index(i))
+            user_oper.pop(operator)
             if len(user_number) == 1:
                 return user_number[0]
         elif i == '/':
-            na = user_number[user_oper.index(i)] // user_number[user_oper.index(i)+1]
-            user_number.pop(user_oper.index(i))
-            user_number.pop(user_oper.index(i))
-            user_number.insert(0,na)
+            division = user_number[operator] // user_number[operator+1]
+            user_number.pop(operator)
+            user_number.pop(operator)
+            user_number.insert(0,division)
             user_oper.remove(i)
             if len(user_number) == 1:
                 return user_number[0]
     if user_oper[0] == '*':
-        gop = user_number[user_oper.index(i)] * user_number[user_oper.index(i) + 1]
-        return gop
+        multiple = user_number[operator] * user_number[operator + 1]
+        return multiple
     elif user_oper[0] == '/':
-        na = user_number[user_oper.index(i)] // user_number[user_oper.index(i) + 1]
-        return na
+        division = user_number[operator] // user_number[operator + 1]
+        return division
     for i in range(len(user_oper)):
         if user_oper[i] == '+':
-            hap += user_number[i + 1]
+            initial_value += user_number[i + 1]
         elif user_oper[i] == '-':
-            hap -= user_number[i + 1]
-    return hap
+            initial_value -= user_number[i + 1]
+    return initial_value
 
 def main():
     # 계산을 원하는 식을 입력(ex: 3+3, 1*2...)
@@ -69,4 +70,4 @@ class customtest(TestCase):
         self.assertEqual(calc(['+', '*'],[12, 2, 3]), 18)
 
 if __name__ == '__main__':
-    main()
+    customtest()
