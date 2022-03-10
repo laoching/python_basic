@@ -4,6 +4,31 @@
 
 from unittest import *
 
+def number_separate(formula):
+    oper = ['+', '-', '*', '/']
+    user_number = []
+    for i in formula:
+        if i in oper:
+            # oper 리스트에 있는 문자열을 만나면 그 앞의 문자들을 user_number에 추가
+            user_number.append(formula[:formula.index(i)])
+            # 숫자 추가 후 숫자와 연산자 제거
+            formula = formula[formula.index(i) + 1:]
+    # 연산자가 없는 경우 남은 문자를 user_number에 추가
+    user_number.append(formula)
+    # user_number 리스트를 int형으로 변환
+    user_number = list(map(int, user_number))
+    return user_number
+
+def oper_separate(formula):
+    oper = ['+', '-', '*', '/']
+    user_oper = []
+    for i in formula:
+        if i in oper:
+            user_oper.append(i)
+            # 숫자 추가 후 숫자와 연산자 제거
+            formula = formula[formula.index(i) + 1:]
+    return user_oper
+
 # 연산을 수행하고 결과를 출력하는 calc 함수
 def calc(user_oper, user_number):
     initial_value = user_number[0]
@@ -45,21 +70,9 @@ def calc(user_oper, user_number):
 def main():
     # 계산을 원하는 식을 입력(ex: 3+3, 1*2...)
     formula = input()
-    oper = ['+', '-', '*', '/']
-    user_oper = []
-    user_number = []
-    for i in formula:
-        if i in oper:
-            user_oper.append(i)
-            # oper 리스트에 있는 문자열을 만나면 그 앞의 문자들을 user_number에 추가
-            user_number.append(formula[:formula.index(i)])
-            # 숫자 추가 후 숫자와 연산자 제거
-            formula = formula[formula.index(i) + 1:]
-    # 연산자가 없는 경우 남은 문자를 user_number에 추가
-    user_number.append(formula)
-    # user_number 리스트를 int형으로 변환
-    user_number = list(map(int, user_number))
-    print(f'result: {calc(user_oper, user_number)}')
+    number_separate(formula)
+    oper_separate(formula)
+    print(f'result: {calc(oper_separate(formula), number_separate(formula))}')
 
 class customtest(TestCase):
     def test_sum_units_digit(self):
@@ -70,4 +83,4 @@ class customtest(TestCase):
         self.assertEqual(calc(['+', '*'],[12, 2, 3]), 18)
 
 if __name__ == '__main__':
-    customtest()
+    main()
