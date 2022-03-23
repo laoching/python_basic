@@ -36,27 +36,31 @@ def calc(combine_formula):
                 # * 연산자를 만나면 연산자 기준 앞, 뒤의 숫자들을 곱해서 multiple 변수에 넣음
                 multiple = combine_formula[combine_formula.index(i)-1] * combine_formula[combine_formula.index(i)+1]
                 # 연산에 사용된 숫자, 연산자는 리스트에서 제거
+                print(multiple)
                 combine_formula.pop(combine_formula.index(i)-1)
+                print(combine_formula)
                 combine_formula.pop(combine_formula.index(i))
+                print(combine_formula)
                 # 연산 결과를 다시 리스트에 삽입
-                combine_formula.append(multiple)
+                combine_formula.insert(combine_formula.index(i)-1, multiple)
 
             if i == '/':
                 division = combine_formula[combine_formula.index(i)-1] // combine_formula[combine_formula.index(i)+1]
                 combine_formula.pop(combine_formula.index(i)-1)
                 combine_formula.pop(combine_formula.index(i))
-                combine_formula.insert(0, division)
+                combine_formula.insert(combine_formula.index(i)-1, division)
 
     initial_value = combine_formula[0]
     for i in range(len(combine_formula)):
-        if combine_formula[i] == '+':
-            initial_value += combine_formula[i + 1]
-        elif combine_formula[i] == '-':
-            initial_value -= combine_formula[i + 1]
-        elif combine_formula[i] == '/':
+        if combine_formula[i] == '/':
             initial_value /= combine_formula[i + 1]
         elif combine_formula[i] == '*':
             initial_value *= combine_formula[i + 1]
+        elif combine_formula[i] == '+':
+            initial_value += combine_formula[i + 1]
+        elif combine_formula[i] == '-':
+            initial_value -= combine_formula[i + 1]
+
     return initial_value
 
 def main():
