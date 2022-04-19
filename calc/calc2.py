@@ -33,31 +33,31 @@ def parse_formula(formula):
         if cnt == len(user_number):
             # 남은 1개의 숫자를 combine_formula 리스트에 추가
             combine_formula.append(user_number[cnt - 1])
+    print(combine_formula)
     return combine_formula
 
 
 def calc(combine_formula):
     for i in combine_formula:
-        if len(combine_formula) == 1:
-            continue
-            if i == '*':
-                # * 연산자를 만나면 연산자 기준 앞, 뒤의 숫자들을 곱해서 multiple 변수에 넣음
-                multiple = combine_formula[combine_formula.index(i) - 1] * combine_formula[combine_formula.index(i) + 1]
-                # 연산에 사용된 숫자, 연산자는 리스트에서 제거
-                print(multiple)
-                combine_formula.pop(combine_formula.index(i) - 1)
-                print(combine_formula)
-                combine_formula.pop(combine_formula.index(i))
-                print(combine_formula)
-                # 연산 결과를 다시 리스트에 삽입
-                combine_formula.insert(combine_formula.index(i) - 1, multiple)
-
-            if i == '/':
-                division = combine_formula[combine_formula.index(i) - 1] // combine_formula[
-                    combine_formula.index(i) + 1]
-                combine_formula.pop(combine_formula.index(i) - 1)
-                combine_formula.pop(combine_formula.index(i))
-                combine_formula.insert(combine_formula.index(i) - 1, division)
+        #if len(combine_formula) == 1:
+            #continue
+        if i == '*':
+            # * 연산자를 만나면 연산자 기준 앞, 뒤의 숫자들을 곱해서 multiple 변수에 넣음
+            multiple = combine_formula[combine_formula.index(i) - 1] * combine_formula[combine_formula.index(i) + 1]
+            # 연산에 사용된 숫자, 연산자는 리스트에서 제거
+            print(multiple)
+            combine_formula.pop(combine_formula.index(i) - 1)
+            print(combine_formula)
+            combine_formula.pop(combine_formula.index(i))
+            print(combine_formula)
+            # 연산 결과를 다시 리스트에 삽입
+            combine_formula.insert(combine_formula.index(i) - 1, multiple)
+        if i == '/':
+            division = combine_formula[combine_formula.index(i) - 1] // combine_formula[
+                combine_formula.index(i) + 1]
+            combine_formula.pop(combine_formula.index(i) - 1)
+            combine_formula.pop(combine_formula.index(i))
+            combine_formula.insert(combine_formula.index(i) - 1, division)
 
     initial_value = combine_formula[0]
     for i in range(len(combine_formula)):
